@@ -31,3 +31,10 @@ Learnive is a web-based queue management system designed to reduce waiting time 
 
 ## Project Name
 Learnive – Virtual Smart Queue Management System
+## Screenshots
+
+### Student Registration Page
+![Student Page](Screenshot%20(345).png)
+
+### Admin Dashboard
+![Admin Dashboard](Screenshot%20(346).png)
