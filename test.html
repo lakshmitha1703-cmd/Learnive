@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learnive API Test</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f4ff;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 450px;
+            margin: auto;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #8b9cf6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Learnive Customer Registration</h2>
+
+    <input id="customerName" placeholder="Enter customer name">
+
+    <select id="service">
+        <option value="">Choose a service</option>
+        <option>Student Support</option>
+        <option>Library</option>
+        <option>Accounts</option>
+        <option>Administration</option>
+    </select>
+
+    <button onclick="registerCustomer()">Generate Token</button>
+
+    <h3>Result</h3>
+    <div id="result"></div>
+
+    <button onclick="loadCustomers()">View All Customers</button>
+    <div id="customers"></div>
+</div>
+
+<script>
+async function registerCustomer() {
+    const customer_name =
+        document.getElementById("customerName").value.trim();
+
+    const service =
+        document.getElementById("service").value;
+
+    const result = document.getElementById("result");
+
+    try {
+        const response = await fetch("http://localhost:3000/api/customers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ customer_name, service })
+        });
+
+        const data = await response.json();
+        result.textContent = JSON.stringify(data, null, 2);
+
+        if (response.ok) {
+            document.getElementById("customerName").value = "";
+            loadCustomers();
+        }
+    } catch (error) {
+        result.textContent = "Connection error: " + error.message;
+    }
+}
+
+async function loadCustomers() {
+    try {
+        const response =
+            await fetch("http://localhost:3000/api/customers");
+
+        const data = await response.json();
+
+        document.getElementById("customers").textContent =
+            JSON.stringify(data, null, 2);
+    } catch (error) {
+        document.getElementById("customers").textContent =
+            "Error: " + error.message;
+    }
+}
+</script>
+
+</body>
+</html>

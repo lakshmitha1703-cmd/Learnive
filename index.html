@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnive - Virtual Queue Management</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Learnive</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#join">Join Queue</a>
+        <a href="#status">Track Token</a>
+        <a href="#admin-login">Admin</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>Welcome to Learnive</h1>
+    <p>Virtual Queue Management System</p>
+    <p>Manage your queue easily, quickly and efficiently.</p>
+    <a href="#join" class="hero-button">Join the Queue</a>
+</section>
+
+<section class="stats">
+    <div class="stat-card">
+        <h3>Currently Serving</h3>
+        <p id="current-serving">--</p>
+    </div>
+    <div class="stat-card">
+        <h3>Waiting Customers</h3>
+        <p id="waiting-count">0</p>
+    </div>
+    <div class="stat-card">
+        <h3>Estimated Wait</h3>
+        <p id="wait-time">0 min</p>
+    </div>
+</section>
+
+<!-- ABOUT LEANIVE -->
+<section class="section" id="about">
+    <h2>About Learnive</h2>
+
+    <div class="form-card">
+        <h3>Making Queue Management Easier</h3>
+
+        <p>
+            Learnive is a Virtual Queue Management System designed
+            to make student service management simple, fast and
+            organised.
+        </p>
+
+        <p>
+            Students can generate tokens online, track their queue
+            status and know when their turn arrives without waiting
+            in long physical queues.
+        </p>
+
+        <p>
+            Administrators can manage customers, call the next
+            customer, update service status and monitor queue
+            activities through a single dashboard.
+        </p>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+    <h2>Our Key Features</h2>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Easy Token Generation</h3>
+            <p>Generate tokens online easily.</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Live Queue Tracking</h3>
+            <p>Check your token status anytime.</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Admin Dashboard</h3>
+            <p>Manage and monitor customer queues.</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Queue Analytics</h3>
+            <p>View service-wise customer statistics.</p>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+    <h2>How It Works</h2>
+
+    <div class="form-card">
+        <h3>Step 1: Join the Queue</h3>
+        <p>Enter your name and select the required service.</p>
+
+        <h3>Step 2: Get Your Token</h3>
+        <p>Receive a unique token number automatically.</p>
+
+        <h3>Step 3: Track Your Status</h3>
+        <p>Enter your token number to check your position.</p>
+
+        <h3>Step 4: Get Your Service</h3>
+        <p>Visit the service counter when your turn arrives.</p>
+    </div>
+</section>
+
+<section class="section" id="join">
+    <h2>Join the Queue</h2>
+
+    <div class="form-card">
+        <label for="student-name">Your Name</label>
+        <input type="text" id="student-name" placeholder="Enter your name">
+
+        <label for="service">Choose a Service</label>
+        <select id="service">
+            <option value="">Select a service</option>
+            <option value="Student Support">Student Support</option>
+            <option value="Library">Library</option>
+            <option value="Accounts">Accounts</option>
+            <option value="Administration">Administration</option>
+        </select>
+
+        <button id="join-btn">Generate My Token</button>
+    </div>
+</section>
+
+<section class="section" id="status">
+    <h2>Track Your Token</h2>
+
+    <div class="form-card">
+        <h3>Check Your Queue Status</h3>
+
+        <label for="track-token">Enter Your Token Number</label>
+        <input type="text" id="track-token" placeholder="Example: T009">
+
+        <button id="track-btn">Track My Status</button>
+
+        <div class="tracking-result" id="tracking-result">
+            <h3 id="tracking-token">Your Token</h3>
+            <p id="tracking-name">Customer Name: --</p>
+            <p id="tracking-service">Service: --</p>
+            <p id="tracking-status">Status: --</p>
+            <p id="tracking-message">
+                Enter your token number to check your status.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <h3>Your Latest Token</h3>
+        <h2 id="my-token">--</h2>
+        <p id="token-message">Your token will appear here.</p>
+        <p id="token-details"></p>
+        <button id="cancel-btn">Cancel My Token</button>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Live Waiting List</h2>
+    <div id="queue-list" class="queue-list">
+        No customers waiting.
+    </div>
+</section>
+
+<section class="section" id="admin-login">
+    <h2>Admin Login</h2>
+
+    <div class="form-card">
+        <label for="admin-email">Email</label>
+        <input type="email" id="admin-email"
+               placeholder="Enter admin email">
+
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password"
+               placeholder="Enter password">
+
+        <button id="toggle-password">
+            Show / Hide Password
+        </button>
+
+        <button id="admin-login-btn">Login as Admin</button>
+        <p id="login-message"></p>
+    </div>
+</section>
+
+<section class="section admin-section" id="admin" hidden>
+    <h2>Admin Dashboard</h2>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Customers</h3>
+            <p id="total-customers">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Waiting</h3>
+            <p id="admin-waiting">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Completed</h3>
+            <p id="admin-completed">0</p>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <h3>Currently Serving</h3>
+
+        <div class="current-serving">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th>Customer Name</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="current-serving-table">
+                    <tr>
+                        <td colspan="4">
+                            No customer currently serving.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button id="next-btn">Call Next Customer</button>
+        <button id="complete-btn">Mark as Completed</button>
+        <p id="admin-message"></p>
+    </div>
+
+    <div class="form-card">
+        <h3>Search Customer</h3>
+        <input type="text" id="search-token"
+               placeholder="Enter token number">
+
+        <button id="search-btn">Search Token</button>
+        <p id="search-result"></p>
+    </div>
+
+    <h3>Service-wise Statistics</h3>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h4>Student Support</h4>
+            <p id="student-support-count">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Library</h4>
+            <p id="library-count">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Accounts</h4>
+            <p id="accounts-count">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Administration</h4>
+            <p id="administration-count">0</p>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <h3>Queue Analytics</h3>
+        <p>Customer Distribution Across Different Services</p>
+
+        <div class="chart-container">
+            <canvas id="serviceChart"></canvas>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <h3>Customer History</h3>
+        <div id="history-list">
+            No completed customers yet.
+        </div>
+    </div>
+
+    <button id="logout-btn">Logout</button>
+</section>
+
+<footer>
+    <p>© 2026 Learnive | Virtual Queue Management System</p>
+    <p>Smart Queue Management for a Better Student Experience</p>
+</footer>
+
+</body>
+</html>
