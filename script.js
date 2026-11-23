@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://learnive.onrender.com/api";
 
 let queue = [];
 let currentCustomer = null;
@@ -33,8 +33,7 @@ async function readResponse(response) {
         return text ? JSON.parse(text) : {};
     } catch {
         throw new Error(
-            `Server returned an unexpected response (HTTP ${response.status}). ` +
-            "Please check the backend API route."
+            `Server returned an unexpected response (HTTP ${response.status}). Please check the backend API route.`
         );
     }
 }
